@@ -9,7 +9,7 @@ class GildedRoseTest {
     @Test
         // Normal degradation of quality after update
     void qualityDegradesPostSellDate() {
-        Item[] items = new Item[] { new Item("Conjured Mana Cake", 1, 2) };
+        Item[] items = new Item[] { new Item("+5 Dexterity Vest", 1, 2) };
         GildedRose app = new GildedRose(items);
         app.updateQuality();
         assertEquals(1, app.items[0].quality);
@@ -17,7 +17,7 @@ class GildedRoseTest {
     @Test
         // Once the sell by date has passed, Quality degrades twice as fast
     void qualityDegradesTwiceAsFastPostSellDate() {
-        Item[] items = new Item[] { new Item("Conjured Mana Cake", 0, 2) };
+        Item[] items = new Item[] { new Item("+5 Dexterity Vest", 0, 2) };
         GildedRose app = new GildedRose(items);
         app.updateQuality();
 //        System.out.println( items[0].sellIn+ " "+ items[0].quality);
@@ -26,7 +26,7 @@ class GildedRoseTest {
     @Test
         // The Quality of an item is never negative
     void qualityOfItemNotNegative() {
-        Item[] items = new Item[] { new Item("Conjured Mana Cake", 0, 0) };
+        Item[] items = new Item[] { new Item("+5 Dexterity Vest", 0, 0) };
         GildedRose app = new GildedRose(items);
         app.updateQuality();
         assertEquals(0, app.items[0].quality);
@@ -122,5 +122,14 @@ class GildedRoseTest {
         GildedRose app = new GildedRose(items);
         app.updateQuality();
         assertEquals(80, app.items[0].quality);
+    }
+
+    @Test
+        //  "Conjured" items degrade in Quality twice as fast as normal items
+    void conjuredItemsDegradeTwiceAsFast() {
+        Item[] items = new Item[] { new Item("Conjured Mana Cake", 1, 2) };
+        GildedRose app = new GildedRose(items);
+        app.updateQuality();
+        assertEquals(0, app.items[0].quality);
     }
 }

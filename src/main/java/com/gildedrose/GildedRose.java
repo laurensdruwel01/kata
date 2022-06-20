@@ -22,14 +22,16 @@ class GildedRose {
 
     public void updateQuality() {
         for (Item item : items) {
-
             if (item.name.equals("Aged Brie") || item.name.equals("Backstage passes to a TAFKAL80ETC concert")) {
                 changeQuality(item, 1);
                 handleQualityForBackStage(item);
             } else {
                 changeQuality(item, -1);
+            }
 
-
+            // conjured items should be degraded twice
+            if(item.name.equals("Conjured Mana Cake")) {
+                changeQuality(item, -1);
             }
 
             // normal degradation
